@@ -1,6 +1,6 @@
 # 图片格式化
 
-已知 `*.hdslb.com` `archive.biliimg.com` 等域名作用等效, 对于请求头 `Referer` 要求留空或在 `.bilibili.com` 等 B 站域名下 <!--(所以 B 站图床 img 标签要加上 `referrerpolicy="no-referrer"`)-->
+已知 `*.hdslb.com` `*.biliimg.com` 等域名作用等效, 对于请求头 `Referer` 要求留空或在 `.bilibili.com` 等 B 站域名下 <!--(所以 B 站图床 img 标签要加上 `referrerpolicy="no-referrer"`)-->
 
 对于以上域名的 `/bfs/` 下的图片文件都可以使用以下可选格式化参数
 
@@ -34,39 +34,38 @@
 
 https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg
 
-![](https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg)
+<img src="https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg" referrerpolicy="no-referrer" />
 
 高度限制为100
 
 https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@100h
 
-![](https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@100h)
+<img src="https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@100h" referrerpolicy="no-referrer" />
 
 宽度限制为100
 
 https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@100w
 
-![](https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@100w)
+<img src="https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@100w" referrerpolicy="no-referrer" />
 
 转换格式为webp
 
 https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@.webp
 
-![](https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@.webp)
+<img src="https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@.webp" referrerpolicy="no-referrer" />
 
 转换为webp图片质量为1%
 
 https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@1q.webp
 
-![](https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@1q.webp)
-
+<img src="https://i1.hdslb.com/bfs/archive/e5fff1472bad1c0c6bcb3004205f9be23b58ffc0.jpg@1q.webp" referrerpolicy="no-referrer" />
 </details>
 
 ## avg_color格式说明
 
 当图片格式化输出格式为`avg_color`时
 
-> \*.hdslb.com/bfs/\*/\*.*@\*.avg_color
+> /bfs/\*/\*.*@\*.avg_color
 
 *请求方式：GET*
 

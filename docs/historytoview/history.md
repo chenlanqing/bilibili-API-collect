@@ -120,7 +120,7 @@
 | cid      | num  | 观看到的对象id        | 稿件视频&剧集（当`business=archive`或`business=pgc`时）：视频cid<br />文集（当`business=article-list`时）：文章cvid |
 | part     | str  | 观看到的视频分 P 标题 | 仅用于稿件视频                                               |
 | business | str  | 业务类型              | **见请求参数**                                               |
-| dt       | num  | 记录查看的平台代码    | 1 3 5 7：手机端<br />2：web端<br />4 6：pad端<br />33：TV端<br />0：其他 |
+| dt       | num  | 记录查看的平台代码    | 1 3 5 7：手机端<br />2：web端<br />4 6：pad端<br />9: 智能音箱/游戏机33：TV端<br />0：其他 |
 
 **示例：**
 
@@ -387,7 +387,7 @@ curl -G 'https://api.bilibili.com/x/web-interface/history/cursor' \
 | videos                          | num     | 视频分P总数                    | 默认为1                                                      |
 | tid                             | num     | 分区tid                        |                                                              |
 | tname                           | str     | 子分区名称                     |                                                              |
-| copyright                       | num     | 是否转载                       | 1：原创<br />2：转载                                         |
+| copyright                       | num     | 是否转载                       | 1：原创<br />2：转载<br />3：未填写                            |
 | pic                             | str     | 视频封面图片url                |                                                              |
 | title                           | str     | 稿件标题                       |                                                              |
 | pubdate                         | num     | 稿件发布时间                   | 时间戳                                                       |

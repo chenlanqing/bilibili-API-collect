@@ -357,7 +357,7 @@ curl -G 'https://member.bilibili.com/x2/creative/web/seasons' \
 
 注: 有人工审核
 
-**正文参数:**
+**正文参数 (application/x-www-form-urlencoded):**
 
 | 参数名 | 类型 | 内容     | 必要性 | 备注 |
 | ------ | ---- | -------- | ------ | ---- |
@@ -724,6 +724,364 @@ curl -X POST 'https://member.bilibili.com/x2/creative/web/season/del' \
   "code": 0,
   "message": "0",
   "ttl": 1
+}
+```
+
+</details>
+
+## 获取合集小节中的视频
+
+> https://member.bilibili.com/x2/creative/web/season/section
+
+*请求方法: GET*
+
+认证方式: Cookie (SESSDATA)
+
+可以在给合集排序时使用, 可以获取别人的
+
+**URL 参数:**
+
+| 参数名 | 类型 | 内容 | 必要性 | 备注 |
+| ----- | --- | ---- | ----- | --- |
+| id    | num | 合集 ID | 必要 |    |
+
+**JSON 回复:**
+
+| 字段    | 类型 | 内容     | 备注 |
+| ------- | ---- | -------- | ---- |
+| code    | num  | 返回值   | 0：成功 |
+| message | str  | 错误信息 |      |
+| ttl     | num  | 1        |      |
+| data    | obj  | 信息本体 |      |
+
+`data` 对象:
+
+| 字段      | 类型 | 内容         | 备注 |
+| --------- | ---- | ------------ | ---- |
+| section   | obj  | 小节信息     |      |
+| episodes  | arr  | 小节中的视频 | |
+
+`data` 对象中的 `section` 对象:
+
+| 字段      | 类型 | 内容         | 备注 |
+| --------- | ---- | ------------ | ---- |
+| id        | num  | 小节 ID      |      |
+| type      | num  | 小节类型     |      |
+| seasonId  | num  | 合集 ID      |      |
+| title     | str  | 小结标题     |      |
+| order     | str  | 排序编号?    |      |
+| isEnd     | num  | 是否已完结?  | 0: 未完结 |
+| state     | num  | 合集状态? | 0: 正常显示<br />-6: 正在审核 |
+| partState | num  | 合集分段状态? | 0 |
+| rejectReason | str | 合集拒绝原因? |      |
+| ctime     | num  | 创建时间      |      |
+| mtime     | num  | 修改时间      |      |
+| epCount   | num  | 小节视频总数 |      |
+| cover     | num  | 合集封面     |      |
+| show | num | 是否公开? | 1: 公开 |
+| has_charging_pay | num | 是否充电付费? | 0: 否 |
+| Episodes  | null |      |   |
+| has_pugv_pay | num | 是否 PUGV 付费? | 0: 否 |
+
+`data` 对象中的 `episodes`数组中的对象:
+
+| 字段      | 类型 | 内容         | 备注 |
+| --------- | ---- | ------------ | ---- |
+| id        | num  | 合集内视频 ID |      |
+| title     | str  | 视频标题      |      |
+| aid       | num  | 视频 aid     |      |
+| bvid      | str  | 视频 bvid    |      |
+| cid       | num  | 视频 cid     |      |
+| seasonId  | num  | 合集 ID       |      |
+| sectionId | num  | 小节 ID       |      |
+| order     | num  | 排序编号      |      |
+| videoTitle | str | 视频标题 |      |
+| archiveTitle | str | 看起来也是标题 |      |
+| archiveState | num | 0 |      |
+| rejectReason | str | 拒绝理由?    |      |
+| state     | num  | 0 |      |
+| cover     | str  | 封面 URL      |      |
+| is_free   | num  | 是否免费? | 0: 免费 |
+| aid_owner | bool | 是否视频所有者 | true:是所有者  |
+| charging_pay | num | 充电付费? | 0: 否 |
+
+
+**示例:**
+
+获取合集小节 176088 的视频
+
+```shell
+curl -G --url 'https://member.bilibili.com/x2/creative/web/season/section' \
+--url-query 'id=176088' \
+-b 'SESSDATA=xxx'
+```
+
+<details>
+<summary>查看响应示例:</summary>
+  
+会返回全部的，由于很长，这里只保留三个作为例子
+
+```json
+{
+    "code": 0,
+    "message": "0",
+    "ttl": 1,
+    "data": {
+        "section": {
+            "id": 176088,
+            "type": 1,
+            "seasonId": 152812,
+            "title": "正片",
+            "order": 1,
+            "state": 0,
+            "partState": 0,
+            "rejectReason": "",
+            "ctime": 1643250822,
+            "mtime": 1739466002,
+            "epCount": 112,
+            "cover": "http://i1.hdslb.com/bfs/archive/4439a182b142d92a169609e6e14e7217b3e14e0d.jpg",
+            "has_charging_pay": 0,
+            "Episodes": null,
+            "show": 1,
+            "has_pugv_pay": 0
+        },
+        "episodes": [
+            {
+                "id": 109100674,
+                "title": "「开箱评测」三星Note8 EMR2笔对比公版Wacom笔 套娃笔首选 10寸 RK PX30 Wacom 电子书 天喻墨学 M2 M3",
+                "aid": 113997323963614,
+                "bvid": "BV14BNfeSE5c",
+                "cid": 28376042631,
+                "seasonId": 152812,
+                "sectionId": 176088,
+                "order": 1,
+                "videoTitle": "「开箱评测」三星Note8 EMR2笔对比公版Wacom笔 套娃笔首选 10寸 RK PX30 Wacom 电子书 天喻墨学 M2 M3",
+                "archiveTitle": "「开箱评测」三星Note8 EMR2笔对比公版Wacom笔 套娃笔首选 10寸 RK PX30 Wacom 电子书 天喻墨学 M2 M3",
+                "archiveState": 0,
+                "rejectReason": "",
+                "state": 0,
+                "cover": "",
+                "is_free": 0,
+                "aid_owner": true,
+                "charging_pay": 0,
+                "member_first": 0,
+                "pugv_pay": 0
+            },
+            {
+                "id": 108733886,
+                "title": "「开箱评测」拆解 椭圆形的第三方AirTag GRTSZ S2 Tag",
+                "aid": 113982291576104,
+                "bvid": "BV1YyNvetEbX",
+                "cid": 28325121446,
+                "seasonId": 152812,
+                "sectionId": 176088,
+                "order": 2,
+                "videoTitle": "「开箱评测」拆解 椭圆形的第三方AirTag GRTSZ S2 Tag",
+                "archiveTitle": "「开箱评测」拆解 椭圆形的第三方AirTag GRTSZ S2 Tag",
+                "archiveState": 0,
+                "rejectReason": "",
+                "state": 0,
+                "cover": "",
+                "is_free": 0,
+                "aid_owner": true,
+                "charging_pay": 0,
+                "member_first": 0,
+                "pugv_pay": 0
+            },
+            {
+                "id": 106045797,
+                "title": "「开箱评测」这帕姆怎么射不出来呢！ 星穹铁道 KFC联动 财神帕姆 太可爱了",
+                "aid": 113892936122993,
+                "bvid": "BV1ZFFKeTEkr",
+                "cid": 28087484764,
+                "seasonId": 152812,
+                "sectionId": 176088,
+                "order": 3,
+                "videoTitle": "「开箱评测」这帕姆怎么射不出来呢！ 星穹铁道 KFC联动 财神帕姆 太可爱了",
+                "archiveTitle": "「开箱评测」这帕姆怎么射不出来呢！ 星穹铁道 KFC联动 财神帕姆 太可爱了",
+                "archiveState": 0,
+                "rejectReason": "",
+                "state": 0,
+                "cover": "",
+                "is_free": 0,
+                "aid_owner": true,
+                "charging_pay": 0,
+                "member_first": 0,
+                "pugv_pay": 0
+            }
+        ]
+    }
+}
+```
+
+</details>
+
+## 编辑投稿视频合集
+
+> https://member.bilibili.com/x2/creative/web/season/switch
+*请求方式: POST*
+
+认证方式：Cookie(SESSDATA)
+
+**URL参数:**
+
+| 参数名 | 类型 | 内容     | 必要性 | 备注 |
+| ------ | ---- | -------- | ------ | ---- |
+| t      | num  | 当前时间 | 非必要 | UNIX 毫秒时间戳 |
+| csrf   | str  | CSRF Token (位于 Cookie 中 bili_jct) | 必要   |      |
+
+**正文参数(application/json):**
+
+| 参数名 | 类型 | 内容     | 必要性 | 备注 |
+| ------ | ---- | -------- | ------ | ---- |
+| aid    | num  | 视频 ID  | 必要   |      |
+| season_id | num  | null | 合集 ID | 必要   | null 表示从合集中移除 |
+| section_id | num | null | 小节 ID | 必要   | null 表示从小节中移除 |
+| title  | str  | 视频标题 | 必要   |      |
+| csrf   | str  | CSRF Token (位于 Cookie 中 bili_jct) | 非必要   |      |
+
+**JSON回复:**
+
+根对象:
+
+| 字段    | 类型 | 内容     | 备注  |
+| ------- | ---- | -------- | ----- |
+| season_id    | num  | null  |    |  |
+| section_id | num  | null  |  |  |
+| title     | str   | 标题        |       |
+| aid     | num     | aid        |       |
+| csrf     | num  | CSRF Token (位于 Cookie 中 bili_jct)        |       |
+
+**示例:**
+
+```shell
+curl -X POST "https://member.bilibili.com/x2/creative/web/season/switch" \
+--url-query "csrf=xxxxxxxxxxxx" \
+-H "Content-Type: application/json" \
+--data '{
+  "aid": 123456,
+  "season_id": 654321,
+  "section_id": 789012,
+  "title": "新视频标题"
+}' \
+-b "SESSDATA=xxxxxxxxxxx"
+```
+
+<details>
+<summary>查看响应示例:</summary>
+
+```json
+{
+  "season_id": null,
+  "section_id": null,
+  "title": "标题",
+  "aid": 123,
+  "csrf": "eqweeqw"
+}
+```
+
+</details>
+
+## aid反查合集id
+
+> https://member.bilibili.com/x2/creative/web/season/aid
+*请求方式: GET*
+
+认证方式：Cookie(SESSDATA)
+
+**URL参数:**
+
+| 参数名 | 类型 | 内容     | 必要性 | 备注 |
+| ------ | ---- | -------- | ------ | ---- |
+| id     | num  | 视频 aid  | 必要   |      |
+
+**JSON回复:**
+
+根对象:
+
+| 字段    | 类型 | 内容     | 备注  |
+| ------- | ---- | -------- | ----- |
+| code    | num  | 返回值   | 0: 成功<br />其他: 失败 |
+| message | str  | 错误信息 | 默认为 0 |
+| ttl     | num  | 1        |       |
+| data    | obj  | 信息本体 |       |
+
+
+
+`data` 对象:
+
+| 字段 | 类型 | 内容     | 备注 |
+| ---- | ---- | -------- | ---- |
+| season | obj | 合集信息 |      |
+
+
+`season` 对象:
+
+| 字段 | 类型 | 内容     | 备注 |
+| ---- | ---- | -------- | ---- |
+| id   | num  | 合集 ID  |      |
+| title | str | 合集标题 |      |
+| cover | str | 合集封面 URL |  |
+| desc | str | 合集描述 |  |
+| isEnd | num | 是否已完结 | 0: 未完结<br />1: 已完结 |
+| mid | num | 合集作者 ID |  |
+| isAct | num | 是否为活动合集 | 0: 否<br />1: 是 |
+| is_pay | num | 是否付费 | 0: 否<br />1: 是 |
+| state | num | 合集状态 | 0: 正常显示<br />-6: 正在审核 |
+| partState | num | 合集分段状态 | 0: 正常 |
+| signState | num | 合集签名状态 | 0: 正常 |
+| rejectReason | str | 合集拒绝原因 |  |
+| ctime | num | 创建时间 | UNIX 时间戳 |
+| mtime | num | 修改时间 | UNIX 时间戳 |
+| no_section | num | 是否设小节 | 1: 不设小节 |
+| forbid | num | 合集是否禁止 | 0: 否<br />1: 是 |
+| protocol_id | str | 协议 ID |  |
+| ep_num | num | 视频数量 |  |
+| season_price | num | 合集价格 | 0: 免费 |
+| is_opened | num | 是否公开 | 1: 公开<br />0: 不公开 |
+| has_charging_pay | num | 是否充电付费 | 0: 否<br />1: 是 |
+| has_pugv_pay | num | 是否 PUGV 付费 | 0: 否<br />1: 是 |
+
+**示例:**
+
+```shell
+curl -G "https://member.bilibili.com/x2/creative/web/season/aid" \
+--data-urlencode "id=123456" \
+-b "SESSDATA=xxxxxxxxxxx"
+```
+
+<details>
+<summary>查看响应示例:</summary>
+
+```json
+{
+  "code": 0,
+  "message": "0",
+  "ttl": 1,
+  "data": {
+    "id": 12,
+    "title": "合集标题",
+    "desc": "",
+    "cover": "",
+    "isEnd": 0,
+    "mid": 123,
+    "isAct": 0,
+    "is_pay": 0,
+    "state": 0,
+    "partState": 0,
+    "signState": 0,
+    "rejectReason": "",
+    "ctime": 1667232000,
+    "mtime": 1667232000,
+    "no_section": 1,
+    "forbid": 0,
+    "protocol_id": "",
+    "ep_num": 0,
+    "season_price": 0,
+    "is_opened": 1,
+    "has_charging_pay": 0,
+    "has_pugv_pay": 0
+  }
 }
 ```
 
